@@ -22,6 +22,7 @@ public class CPU {
     public String GetSocket() { return socket; }
     public float GetFrequency() { return frequency; }
     public int GetNumOfCores() { return numOfCores; }
+
     public void Input() {
         String name, socket;
         float frequency;
@@ -40,6 +41,7 @@ public class CPU {
 
         SetArguments(name, socket, frequency, numOfCores);
     }
+
     private boolean CheckArguments(String name, String socket, float frequency, int numOfCores) {
         return (frequency >= 0) && (frequency < maxFreq) && (numOfCores >= 0);
     }
