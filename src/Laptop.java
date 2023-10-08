@@ -24,12 +24,7 @@ public class Laptop {
         display = new Display();
     }
     public Laptop(String name, CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display display) {
-        this.name = name;
-        this.cpu = cpu;
-        this.gpu = gpu;
-        this.ram = ram;
-        this.motherboard = motherboard;
-        this.display = display;
+        SetArguments(name, cpu, gpu, ram, motherboard, display);
     }
 
     public String GetName() { return name; }
@@ -39,43 +34,103 @@ public class Laptop {
     public Motherboard GetMotherboard() { return motherboard; }
     public Display GetDisplay() { return display; }
 
-    //вот здесь остановился, нужно сделать set для всех полей
+    public void SetName(String name) {
+        this.name = name;
+    }
+    public void SetCPU(CPU cpu) {
+        if (CheckArguments(this.name, cpu, this.gpu, this.ram, this.motherboard, this.display)) {
+            this.cpu = cpu;
+        }
+        else throw new IllegalArgumentException("Неподходящий сокет!");
+    }
+    public void setGPU(GPU gpu) {
+        this.gpu = gpu;
+    }
+    public void setRam(RAM ram) {
+        if (CheckArguments(this.name, this.cpu, this.gpu, ram, this.motherboard, this.display)) {
+            this.ram = ram;
+        }
+        else throw new IllegalArgumentException("Неподходящий тип памяти!");
+    }
+    public void setMotherboard(Motherboard motherboard) {
+        this.motherboard = motherboard;
+
+        if (this.cpu.GetSocket() != motherboard.GetSocket()) { this.cpu = new CPU(); }
+        if (this.ram.GetRAMType() != motherboard.GetSupportedRAMType()) { this.ram = new RAM(motherboard.GetSupportedRAMType()); }
+    }
+    public void SetDisplay(Display display) {
+        this.display = display;
+    }
 
     public void Input() {
         String name;
-        RAMType type;
-        float frequency;
-        int capacity;
+        CPU cpu = new CPU();
+        GPU gpu = new GPU();
+        RAM ram = new RAM();
+        Motherboard motherboard = new Motherboard();
+        Display display = new Display();
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("Введите название RAM: ");
+        System.out.print("Введите название ноутбука: ");
         name = scan.nextLine();
-        System.out.print("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR5 - 4): ");
-        type = RAMType.IntToRAMType(scan.nextInt());
-        System.out.print("Введите тактовую частоту (в МГц): ");
-        frequency = scan.nextFloat();
-        System.out.print("Введите объем (в ГБ): ");
-        capacity = scan.nextInt();
+        System.out.println("\tВвод параметров процессора");
+        cpu.Input();
+        System.out.println("\tВвод параметров видеокарты");
+        gpu.Input();
+        System.out.println("\tВвод параметров RAM");
+        ram.Input();
+        System.out.println("\tВвод параметров материнской платы");
+        motherboard.Input();
+        System.out.println("\tВвод параметров экрана");
+        display.Input();
 
-        SetArguments(name, type, frequency, capacity);
+        SetArguments(name, cpu, gpu, ram, motherboard, display);
     }
 
-    private boolean CheckArguments(String name, RAMType type, float frequency, int capacity) {
-        return (frequency >= 0) && (frequency <= DDRFreqMax[type.ordinal()]) && (capacity >= 0);
+    private boolean CheckArguments(String name, CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display display) {
+        return (cpu.GetSocket().equals(motherboard.GetSocket())) && (ram.GetRAMType() == motherboard.GetSupportedRAMType());
     }
-    private void SetArguments(String name, RAMType type, float frequency, int capacity) {
-        if (CheckArguments(name, type, frequency, capacity)) {
+    private void SetArguments(String name, CPU cpu, GPU gpu, RAM ram, Motherboard motherboard, Display display) {
+        if (CheckArguments(name, cpu, gpu, ram, motherboard, display)) {
             this.name = name;
-            this.type = type;
-            this.frequency = frequency;
-            this.capacity = capacity;
+            this.cpu = cpu;
+            this.gpu = gpu;
+            this.ram = ram;
+            this.motherboard = motherboard;
+            this.display = display;
         }
-        else throw new IllegalArgumentException("Некорректный формат данных!");
+        else throw new IllegalArgumentException("Несовместимые комплектующие!");
     }
 
     @Override public String toString()
     {
-        return (this.GetName() + ", " + this.GetRAMType() + ", " + this.GetCapacity() + " ГБ, " + this.GetFrequency() + " МГц");
+        String result = "Название модели: " + this.name + "\n" +
+                        "CPU: " + this.cpu + "\n" +
+                        "GPU: " + this.gpu + "\n" +
+                        "RAM: " + this.ram + "\n" +
+                        "Материнская плата: " + this.motherboard + "\n" +
+                        "Экран: " + this.display;
+        return result;
+    }
+
+    public void BoostCPU() {
+        if (this.cpu.GetFrequency() + this.cpu.tryFreq <= this.cpu.maxFreq) {
+            this.cpu = new CPU(this.cpu.GetName(), this.cpu.GetSocket(), this.cpu.GetFrequency() + this.cpu.tryFreq, this.cpu.GetNumOfCores());
+        }
+	    else if (this.cpu.GetFrequency() < this.cpu.maxFreq) {
+            this.cpu = new CPU(this.cpu.GetName(), this.cpu.GetSocket(), this.cpu.maxFreq, this.cpu.GetNumOfCores());
+        }
+	    else System.out.println("Разгон CPU больше невозможен!");
+    }
+    public void BoostRAM() {
+        float maxFreq = this.ram.DDRFreqMax[this.ram.GetRAMType().ordinal()];
+        if (this.ram.GetFrequency() + this.ram.tryFreq <= maxFreq) {
+            ram = new RAM(this.ram.GetName(), this.ram.GetRAMType(), this.ram.GetFrequency() + this.ram.tryFreq, this.ram.GetCapacity());
+        }
+	    else if (this.ram.GetFrequency() < maxFreq) {
+            ram = new RAM(this.ram.GetName(), this.ram.GetRAMType(), maxFreq, this.ram.GetCapacity());
+        }
+	    else System.out.println("Разгон RAM больше невозможен!");
     }
 }

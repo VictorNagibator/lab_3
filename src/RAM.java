@@ -14,6 +14,9 @@ public class RAM {
     public RAM(String name) {
         this.name = name;
     }
+    public RAM(RAMType type) {
+        this.type = type;
+    }
     public RAM(String name, RAMType type, float frequency, int capacity) {
         SetArguments(name, type, frequency, capacity);
     }
