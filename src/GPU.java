@@ -12,7 +12,7 @@ public class GPU {
         this.name = name;
     }
     public GPU(String name, float frequency, int vram) {
-        SetArguments(name, frequency, vram);
+        setArguments(name, frequency, vram);
     }
 
     public String getName() { return name; }

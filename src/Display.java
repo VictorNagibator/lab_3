@@ -9,10 +9,10 @@ public class Display {
 
     }
     public Display(int width, int height) {
-        SetArguments(width, height, this.refreshRate);
+        setArguments(width, height, this.refreshRate);
     }
     public Display(int width, int height, int refreshRate) {
-        SetArguments(width, height, refreshRate);
+        setArguments(width, height, refreshRate);
     }
 
     public int getWidth() { return width; }

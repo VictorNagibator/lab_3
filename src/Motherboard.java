@@ -37,7 +37,7 @@ public class Motherboard {
         System.out.print("Введите чипсет: ");
         chipset = scan.nextLine();
         System.out.print("Введите поддерживаемый тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR5 - 4): ");
-        supportedRAMType = RAMType.IntToRAMType(scan.nextInt());
+        supportedRAMType = RAMType.intToRAMType(scan.nextInt());
 
         this.name = name;
         this.socket = socket;
