@@ -5,9 +5,7 @@ public class GPU {
     private double frequency;
     private int vram;
 
-    public GPU() {
-
-    }
+    public GPU() { }
     public GPU(String name) {
         this.name = name;
     }
@@ -48,8 +46,7 @@ public class GPU {
         else throw new IllegalArgumentException("Некорректный формат данных!");
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         String result = String.format("%s, %.1f МГц, %d ГБ", this.getName(), this.getFrequency(), this.getVRAM());
         return result;
     }

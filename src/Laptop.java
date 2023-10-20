@@ -55,7 +55,9 @@ public class Laptop {
     public void setMotherboard(Motherboard motherboard) {
         this.motherboard = motherboard;
 
+        //если сокеты не совпадают, то старый процессор убираем
         if (this.cpu.getSocket() != motherboard.getSocket()) { this.cpu = new CPU(); }
+        //если не совпадают типы оперативной памяти, то старую память убираем, а новую ставим с таким же типом
         if (this.ram.getRAMType() != motherboard.getSupportedRAMType()) { this.ram = new RAM(motherboard.getSupportedRAMType()); }
     }
     public void setDisplay(Display display) {
@@ -103,8 +105,7 @@ public class Laptop {
         else throw new IllegalArgumentException("Несовместимые комплектующие!");
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         String result = "Название модели: " + this.name + "\n" +
                         "CPU: " + this.cpu + "\n" +
                         "GPU: " + this.gpu + "\n" +

@@ -8,9 +8,7 @@ public class RAM {
     public final double tryFreq = 50f; //условное повышение частоты для разгона
     public final int[] DDRFreqMax = { 400, 1066, 2400, 3333, 6400 }; //массив максимально возможных частот для каждого типа памяти
 
-    public RAM() {
-
-    }
+    public RAM() { }
     public RAM(String name) {
         this.name = name;
     }
@@ -59,8 +57,7 @@ public class RAM {
         else throw new IllegalArgumentException("Некорректный формат данных!");
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         String result = String.format("%s, %s, %d ГБ, %.1f МГц", this.getName(), this.getRAMType().toString(), this.getCapacity(), this.getFrequency());
         return result;
     }

@@ -3,7 +3,7 @@ public enum StatusType {
     INPROCCESS ("В ремонте"),
     FINISHED ("Готов");
 
-    private String name = "";
+    private String name;
 
     StatusType(String name) {
         this.name = name;

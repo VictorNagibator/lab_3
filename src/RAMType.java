@@ -5,7 +5,7 @@ public enum RAMType {
     DDR4 ("DDR4"),
     DDR5 ("DDR5");
 
-    private String name = "";
+    private String name;
 
     RAMType(String name) {
         this.name = name;

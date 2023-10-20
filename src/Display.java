@@ -5,12 +5,8 @@ public class Display {
     private int height;
     private int refreshRate;
 
-    public Display() {
-
-    }
-    public Display(int width, int height) {
-        setArguments(width, height, this.refreshRate);
-    }
+    public Display() { }
+    public Display(int width, int height) { setArguments(width, height, this.refreshRate); }
     public Display(int width, int height, int refreshRate) {
         setArguments(width, height, refreshRate);
     }
@@ -46,8 +42,7 @@ public class Display {
         else throw new IllegalArgumentException("Некорректный формат данных!");
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         return (this.getWidth() + "x" + this.getHeight() + ", "  + this.getRefreshRate() + " Гц");
     }
 }

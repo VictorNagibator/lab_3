@@ -49,8 +49,7 @@ public class Order {
         this.status = status;
     }
 
-    @Override public String toString()
-    {
-        return num + ". " + laptop.getName() + "\t" + status;
+    @Override public String toString() {
+        return (this.getNum() + ". " + laptop.getName() + "\t" + this.getStatus());
     }
 }

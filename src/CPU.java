@@ -8,9 +8,7 @@ public class CPU {
     public final double maxFreq = 9.0; //условная максимальная тактовая частота для процессора
     public final double tryFreq = 0.2; //условное повышение частоты для разгона
 
-    public CPU() {
-
-    }
+    public CPU() { }
     public CPU(String name) {
         this.name = name;
     }
@@ -55,9 +53,8 @@ public class CPU {
         else throw new IllegalArgumentException("Некорректный формат данных!");
     }
 
-    @Override public String toString()
-    {
-        //здесь используется format из-за погрешности, чтобы выводить "красиво" дробные числа
+    @Override public String toString() {
+        //здесь используется format из-за погрешности при расчете частоты, чтобы "красиво" выводить дробные числа
         String result = String.format("%s, %s, %.1f ГГц, %d-ядерный", this.getName(), this.getSocket(), this.getFrequency(), this.getNumOfCores());
         return result;
     }

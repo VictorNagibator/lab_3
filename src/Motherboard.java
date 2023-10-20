@@ -6,9 +6,7 @@ public class Motherboard {
     private String chipset = "";
     private RAMType supportedRAMType = RAMType.DDR;
 
-    public Motherboard() {
-
-    }
+    public Motherboard() { }
     public Motherboard(String name) {
         this.name = name;
     }
@@ -45,8 +43,7 @@ public class Motherboard {
         this.supportedRAMType = supportedRAMType;
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         return (this.getName() + ", " + this.getSocket() + ", " + this.getChipset());
     }
 }
