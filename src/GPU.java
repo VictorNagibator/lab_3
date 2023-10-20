@@ -15,11 +15,11 @@ public class GPU {
         SetArguments(name, frequency, vram);
     }
 
-    public String GetName() { return name; }
-    public float GetFrequency() { return frequency; }
-    public int GetVRAM() { return vram; }
+    public String getName() { return name; }
+    public float getFrequency() { return frequency; }
+    public int getVRAM() { return vram; }
 
-    public void Input() {
+    public void input() {
         String name;
         float frequency;
         int vram;
@@ -33,14 +33,14 @@ public class GPU {
         System.out.print("Введите объем видеопамяти (в ГБ): ");
         vram = scan.nextInt();
 
-        SetArguments(name, frequency, vram);
+        setArguments(name, frequency, vram);
     }
 
-    private boolean CheckArguments(String name, float frequency, int vram) {
+    private boolean checkArguments(String name, float frequency, int vram) {
         return (frequency >= 0) && (vram >= 0);
     }
-    private void SetArguments(String name, float frequency, int vram) {
-        if (CheckArguments(name, frequency, vram)) {
+    private void setArguments(String name, float frequency, int vram) {
+        if (checkArguments(name, frequency, vram)) {
             this.name = name;
             this.frequency = frequency;
             this.vram = vram;
@@ -50,6 +50,6 @@ public class GPU {
 
     @Override public String toString()
     {
-        return (this.GetName() + ", " + this.GetFrequency() + " МГц, " + this.GetVRAM() + " ГБ");
+        return (this.getName() + ", " + this.getFrequency() + " МГц, " + this.getVRAM() + " ГБ");
     }
 }

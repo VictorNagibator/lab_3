@@ -19,12 +19,12 @@ public class Motherboard {
         this.supportedRAMType = supportedRAMType;
     }
 
-    public String GetName() { return name; }
-    public String GetSocket() { return socket; }
-    public String GetChipset() { return chipset; }
-    public RAMType GetSupportedRAMType() { return supportedRAMType; }
+    public String getName() { return name; }
+    public String getSocket() { return socket; }
+    public String getChipset() { return chipset; }
+    public RAMType getSupportedRAMType() { return supportedRAMType; }
 
-    public void Input() {
+    public void input() {
         String name, socket, chipset;
         RAMType supportedRAMType;
 
@@ -47,6 +47,6 @@ public class Motherboard {
 
     @Override public String toString()
     {
-        return (this.GetName() + ", " + this.GetSocket() + ", " + this.GetChipset());
+        return (this.getName() + ", " + this.getSocket() + ", " + this.getChipset());
     }
 }

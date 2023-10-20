@@ -15,11 +15,11 @@ public class Display {
         SetArguments(width, height, refreshRate);
     }
 
-    public int GetWidth() { return width; }
-    public int GetHeight() { return height; }
-    public int GetRefreshRate() { return refreshRate; }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
+    public int getRefreshRate() { return refreshRate; }
 
-    public void Input() {
+    public void input() {
         int width, height, refreshRate;
 
         Scanner scan = new Scanner(System.in);
@@ -31,14 +31,14 @@ public class Display {
         System.out.print("Введите частоту обновления экрана (в Гц): ");
         refreshRate = scan.nextInt();
 
-        SetArguments(width, height, refreshRate);
+        setArguments(width, height, refreshRate);
     }
 
-    private boolean CheckArguments(int width, int height, int refreshRate) {
+    private boolean checkArguments(int width, int height, int refreshRate) {
         return (width >= 0) && (height >= 0) && (refreshRate >= 0);
     }
-    private void SetArguments(int width, int height, int refreshRate) {
-        if (CheckArguments(width, height, refreshRate)) {
+    private void setArguments(int width, int height, int refreshRate) {
+        if (checkArguments(width, height, refreshRate)) {
             this.width = width;
             this.height = height;
             this.refreshRate = refreshRate;
@@ -48,6 +48,6 @@ public class Display {
 
     @Override public String toString()
     {
-        return (this.GetWidth() + "x" + this.GetHeight() + ", "  + this.GetRefreshRate() + " Гц");
+        return (this.getWidth() + "x" + this.getHeight() + ", "  + this.getRefreshRate() + " Гц");
     }
 }

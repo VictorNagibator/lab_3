@@ -13,7 +13,7 @@ public enum StatusType {
         return name;
     }
 
-    public static StatusType IntToStatusType (int intType) {
+    public static StatusType intToStatusType (int intType) {
         switch (intType){
             case 0:
                 return ONHOLD;

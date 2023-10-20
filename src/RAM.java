@@ -18,15 +18,15 @@ public class RAM {
         this.type = type;
     }
     public RAM(String name, RAMType type, float frequency, int capacity) {
-        SetArguments(name, type, frequency, capacity);
+        setArguments(name, type, frequency, capacity);
     }
 
-    public String GetName() { return name; }
-    public RAMType GetRAMType() { return type; }
-    public float GetFrequency() { return frequency; }
-    public int GetCapacity() { return capacity; }
+    public String getName() { return name; }
+    public RAMType getRAMType() { return type; }
+    public float getFrequency() { return frequency; }
+    public int getCapacity() { return capacity; }
 
-    public void Input() {
+    public void input() {
         String name;
         RAMType type;
         float frequency;
@@ -37,20 +37,20 @@ public class RAM {
         System.out.print("Введите название RAM: ");
         name = scan.nextLine();
         System.out.print("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR5 - 4): ");
-        type = RAMType.IntToRAMType(scan.nextInt());
+        type = RAMType.intToRAMType(scan.nextInt());
         System.out.print("Введите тактовую частоту (в МГц): ");
         frequency = scan.nextFloat();
         System.out.print("Введите объем (в ГБ): ");
         capacity = scan.nextInt();
 
-        SetArguments(name, type, frequency, capacity);
+        setArguments(name, type, frequency, capacity);
     }
 
-    private boolean CheckArguments(String name, RAMType type, float frequency, int capacity) {
+    private boolean checkArguments(String name, RAMType type, float frequency, int capacity) {
         return (frequency >= 0) && (frequency <= DDRFreqMax[type.ordinal()]) && (capacity >= 0);
     }
-    private void SetArguments(String name, RAMType type, float frequency, int capacity) {
-        if (CheckArguments(name, type, frequency, capacity)) {
+    private void setArguments(String name, RAMType type, float frequency, int capacity) {
+        if (checkArguments(name, type, frequency, capacity)) {
             this.name = name;
             this.type = type;
             this.frequency = frequency;
@@ -61,6 +61,6 @@ public class RAM {
 
     @Override public String toString()
     {
-        return (this.GetName() + ", " + this.GetRAMType() + ", " + this.GetCapacity() + " ГБ, " + this.GetFrequency() + " МГц");
+        return (this.getName() + ", " + this.getRAMType() + ", " + this.getCapacity() + " ГБ, " + this.getFrequency() + " МГц");
     }
 }

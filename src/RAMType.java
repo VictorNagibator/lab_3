@@ -15,7 +15,7 @@ public enum RAMType {
         return name;
     }
 
-    public static RAMType IntToRAMType (int intType) {
+    public static RAMType intToRAMType (int intType) {
         switch (intType){
             case 0:
                 return DDR;

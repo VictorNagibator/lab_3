@@ -15,15 +15,15 @@ public class CPU {
         this.name = name;
     }
     public CPU(String name, String socket, float frequency, int numOfCores) {
-        SetArguments(name, socket, frequency, numOfCores);
+        setArguments(name, socket, frequency, numOfCores);
     }
 
-    public String GetName() { return name; }
-    public String GetSocket() { return socket; }
-    public float GetFrequency() { return frequency; }
-    public int GetNumOfCores() { return numOfCores; }
+    public String getName() { return name; }
+    public String getSocket() { return socket; }
+    public float getFrequency() { return frequency; }
+    public int getNumOfCores() { return numOfCores; }
 
-    public void Input() {
+    public void input() {
         String name, socket;
         float frequency;
         int numOfCores;
@@ -39,14 +39,14 @@ public class CPU {
         System.out.print("Введите количество ядер: ");
         numOfCores = scan.nextInt();
 
-        SetArguments(name, socket, frequency, numOfCores);
+        setArguments(name, socket, frequency, numOfCores);
     }
 
-    private boolean CheckArguments(String name, String socket, float frequency, int numOfCores) {
+    private boolean checkArguments(String name, String socket, float frequency, int numOfCores) {
         return (frequency >= 0) && (frequency < maxFreq) && (numOfCores >= 0);
     }
-    private void SetArguments(String name, String socket, float frequency, int numOfCores) {
-        if (CheckArguments(name, socket, frequency, numOfCores)) {
+    private void setArguments(String name, String socket, float frequency, int numOfCores) {
+        if (checkArguments(name, socket, frequency, numOfCores)) {
             this.name = name;
             this.socket = socket;
             this.frequency = frequency;
@@ -57,6 +57,6 @@ public class CPU {
 
     @Override public String toString()
     {
-        return (this.GetName() + ", " + this.GetSocket() + ", " + this.GetFrequency() + " ГГц, " + this.GetNumOfCores() + "-ядерный");
+        return (this.getName() + ", " + this.getSocket() + ", " + this.getFrequency() + " ГГц, " + this.getNumOfCores() + "-ядерный");
     }
 }

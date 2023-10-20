@@ -28,22 +28,22 @@ public class Order {
         numOfOrders++;
     }
 
-    public int GetNum() { return num; }
-    public Laptop GetLaptop() { return laptop; }
-    public StatusType GetStatus() { return status; }
-    public void SetLaptop(Laptop laptop) { this.laptop = laptop; }
-    public void SetStatus(StatusType status) { this.status = status; }
+    public int getNum() { return num; }
+    public Laptop getLaptop() { return laptop; }
+    public StatusType getStatus() { return status; }
+    public void setLaptop(Laptop laptop) { this.laptop = laptop; }
+    public void setStatus(StatusType status) { this.status = status; }
 
-    public void Input() {
+    public void input() {
         Laptop laptop = new Laptop();
         StatusType status;
 
         Scanner scan = new Scanner(System.in);
 
         System.out.println("\tВвод параметров ноутбука");
-        laptop.Input();
+        laptop.input();
         System.out.print("\nВведите статус заказа (0 - в ожидании, 1 - в ремонте, 2 - отремонтирован): ");
-        status = StatusType.IntToStatusType(scan.nextInt());
+        status = StatusType.intToStatusType(scan.nextInt());
 
         this.laptop = laptop;
         this.status = status;
@@ -51,6 +51,6 @@ public class Order {
 
     @Override public String toString()
     {
-        return num + ". " + laptop.GetName() + "\t" + status;
+        return num + ". " + laptop.getName() + "\t" + status;
     }
 }
