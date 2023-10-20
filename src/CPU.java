@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class CPU {
     private String name = "";
     private String socket = "";
-    private float frequency;
+    private double frequency;
     private int numOfCores;
-    public final float maxFreq = 9.0F; //условная максимальная тактовая частота для процессора
-    public final float tryFreq = 0.2F; //условное повышение частоты для разгона
+    public final double maxFreq = 9.0; //условная максимальная тактовая частота для процессора
+    public final double tryFreq = 0.2; //условное повышение частоты для разгона
 
     public CPU() {
 
@@ -14,18 +14,18 @@ public class CPU {
     public CPU(String name) {
         this.name = name;
     }
-    public CPU(String name, String socket, float frequency, int numOfCores) {
+    public CPU(String name, String socket, double frequency, int numOfCores) {
         setArguments(name, socket, frequency, numOfCores);
     }
 
     public String getName() { return name; }
     public String getSocket() { return socket; }
-    public float getFrequency() { return frequency; }
+    public double getFrequency() { return frequency; }
     public int getNumOfCores() { return numOfCores; }
 
     public void input() {
         String name, socket;
-        float frequency;
+        double frequency;
         int numOfCores;
 
         Scanner scan = new Scanner(System.in);
@@ -35,17 +35,17 @@ public class CPU {
         System.out.print("Введите сокет: ");
         socket = scan.nextLine();
         System.out.print("Введите его тактовую частоту (в ГГц): ");
-        frequency = scan.nextFloat();
+        frequency = scan.nextDouble();
         System.out.print("Введите количество ядер: ");
         numOfCores = scan.nextInt();
 
         setArguments(name, socket, frequency, numOfCores);
     }
 
-    private boolean checkArguments(String name, String socket, float frequency, int numOfCores) {
+    private boolean checkArguments(String name, String socket, double frequency, int numOfCores) {
         return (frequency >= 0) && (frequency < maxFreq) && (numOfCores >= 0);
     }
-    private void setArguments(String name, String socket, float frequency, int numOfCores) {
+    private void setArguments(String name, String socket, double frequency, int numOfCores) {
         if (checkArguments(name, socket, frequency, numOfCores)) {
             this.name = name;
             this.socket = socket;
@@ -57,6 +57,8 @@ public class CPU {
 
     @Override public String toString()
     {
-        return (this.getName() + ", " + this.getSocket() + ", " + this.getFrequency() + " ГГц, " + this.getNumOfCores() + "-ядерный");
+        //здесь используется format из-за погрешности, чтобы выводить "красиво" дробные числа
+        String result = String.format("%s, %s, %.1f ГГц, %d-ядерный", this.getName(), this.getSocket(), this.getFrequency(), this.getNumOfCores());
+        return result;
     }
 }

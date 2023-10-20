@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class GPU {
     private String name = "";
-    private float frequency;
+    private double frequency;
     private int vram;
 
     public GPU() {
@@ -11,17 +11,17 @@ public class GPU {
     public GPU(String name) {
         this.name = name;
     }
-    public GPU(String name, float frequency, int vram) {
+    public GPU(String name, double frequency, int vram) {
         setArguments(name, frequency, vram);
     }
 
     public String getName() { return name; }
-    public float getFrequency() { return frequency; }
+    public double getFrequency() { return frequency; }
     public int getVRAM() { return vram; }
 
     public void input() {
         String name;
-        float frequency;
+        double frequency;
         int vram;
 
         Scanner scan = new Scanner(System.in);
@@ -29,17 +29,17 @@ public class GPU {
         System.out.print("Введите название видеокарты: ");
         name = scan.nextLine();
         System.out.print("Введите тактовую частоту графического процессора (в МГц): ");
-        frequency = scan.nextFloat();
+        frequency = scan.nextDouble();
         System.out.print("Введите объем видеопамяти (в ГБ): ");
         vram = scan.nextInt();
 
         setArguments(name, frequency, vram);
     }
 
-    private boolean checkArguments(String name, float frequency, int vram) {
+    private boolean checkArguments(String name, double frequency, int vram) {
         return (frequency >= 0) && (vram >= 0);
     }
-    private void setArguments(String name, float frequency, int vram) {
+    private void setArguments(String name, double frequency, int vram) {
         if (checkArguments(name, frequency, vram)) {
             this.name = name;
             this.frequency = frequency;
@@ -50,6 +50,7 @@ public class GPU {
 
     @Override public String toString()
     {
-        return (this.getName() + ", " + this.getFrequency() + " МГц, " + this.getVRAM() + " ГБ");
+        String result = String.format("%s, %.1f МГц, %d ГБ", this.getName(), this.getFrequency(), this.getVRAM());
+        return result;
     }
 }

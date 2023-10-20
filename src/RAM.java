@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class RAM {
     private String name = "";
     private RAMType type = RAMType.DDR;
-    private float frequency;
+    private double frequency;
     private int capacity;
-    public final float tryFreq = 50f; //условное повышение частоты для разгона
+    public final double tryFreq = 50f; //условное повышение частоты для разгона
     public final int[] DDRFreqMax = { 400, 1066, 2400, 3333, 6400 }; //массив максимально возможных частот для каждого типа памяти
 
     public RAM() {
@@ -17,19 +17,19 @@ public class RAM {
     public RAM(RAMType type) {
         this.type = type;
     }
-    public RAM(String name, RAMType type, float frequency, int capacity) {
+    public RAM(String name, RAMType type, double frequency, int capacity) {
         setArguments(name, type, frequency, capacity);
     }
 
     public String getName() { return name; }
     public RAMType getRAMType() { return type; }
-    public float getFrequency() { return frequency; }
+    public double getFrequency() { return frequency; }
     public int getCapacity() { return capacity; }
 
     public void input() {
         String name;
         RAMType type;
-        float frequency;
+        double frequency;
         int capacity;
 
         Scanner scan = new Scanner(System.in);
@@ -39,17 +39,17 @@ public class RAM {
         System.out.print("Введите тип памяти (DDR - 0, DDR2 - 1, DDR3 - 2, DDR4 - 3, DDR5 - 4): ");
         type = RAMType.intToRAMType(scan.nextInt());
         System.out.print("Введите тактовую частоту (в МГц): ");
-        frequency = scan.nextFloat();
+        frequency = scan.nextDouble();
         System.out.print("Введите объем (в ГБ): ");
         capacity = scan.nextInt();
 
         setArguments(name, type, frequency, capacity);
     }
 
-    private boolean checkArguments(String name, RAMType type, float frequency, int capacity) {
+    private boolean checkArguments(String name, RAMType type, double frequency, int capacity) {
         return (frequency >= 0) && (frequency <= DDRFreqMax[type.ordinal()]) && (capacity >= 0);
     }
-    private void setArguments(String name, RAMType type, float frequency, int capacity) {
+    private void setArguments(String name, RAMType type, double frequency, int capacity) {
         if (checkArguments(name, type, frequency, capacity)) {
             this.name = name;
             this.type = type;
@@ -61,6 +61,7 @@ public class RAM {
 
     @Override public String toString()
     {
-        return (this.getName() + ", " + this.getRAMType() + ", " + this.getCapacity() + " ГБ, " + this.getFrequency() + " МГц");
+        String result = String.format("%s, %s, %d ГБ, %.1f МГц", this.getName(), this.getRAMType().toString(), this.getCapacity(), this.getFrequency());
+        return result;
     }
 }
